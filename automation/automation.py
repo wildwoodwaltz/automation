@@ -17,8 +17,11 @@ for line in lines:
 
   email_list = email_filter.findall(line)
   for email in email_list:
+    #Validate each unique E-mail
     if email not in e_mail:
+      #if the e-mail doesn't exist in list, add it
       e_mail.append(str(email))
+      # per client request sort alphabetically
       e_mail.sort()
 
   # Now for phone numbers
@@ -40,5 +43,18 @@ for line in lines:
 #close the file now we are done with it
 file.close()
 
-print(e_mail)
-print(phone_numbers)
+# Now we write to files, first we are going to write the E-mails
+with open('docs/emails.txt', 'w+') as e_mail_file:
+  for adress in e_mail:
+    e_mail_file.write(adress + "\n")
+# Close the file once written
+e_mail_file.close()
+
+# Next we write the phone numbers "We open as w+ so that it will rewrite the file if needed"
+with open('docs/phone_numbers.txt', 'w+') as number_file:
+  for ph_num in phone_numbers:
+    number_file.write(ph_num + "\n")
+# Close the file once written
+number_file.close()
+
+# That's all boss! I got the extentions for you if you want em! 
